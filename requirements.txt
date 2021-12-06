@@ -1,0 +1,6 @@
+quart
+hypercorn
+requests
+websockets
+aiohttp
+pymongo
