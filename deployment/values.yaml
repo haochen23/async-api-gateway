@@ -1,0 +1,7 @@
+global:
+  hostIp: 127.0.0.1
+  imageTag: 666
+  hostname: atvmscond01
+ 
+ports:
+  frontend: 31700

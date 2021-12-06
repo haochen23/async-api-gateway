@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quart-frontend
+  labels:
+    app: quart-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quart-frontend
+  template:
+    metadata:
+      labels:
+         app: quart-frontend
+    spec:
+      containers:
+        - name: quart-frontend
+          image: craecomputervisiont01.azurecr.io/quart-app:{{ .Values.global.imageTag }}
+          ports:
+            - containerPort: 9000
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quart-frontend
+  labels:
+    app: quart-frontend
+spec:
+  selector:
+    app: quart-frontend
+  type: NodePort
+  ports:
+    - nodePort: {{ .Values.ports.frontend }}
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
